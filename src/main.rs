@@ -22,6 +22,7 @@ pub fn main() {
     program.set_input(&public_key.clone());
     program.set_input(&padded_message.clone());
     program.set_input(&sig_1.clone());
+    program.set_input(&sig_2.clone());
     let (_, _, instruction_trace, _, _) = program.clone().trace::<Fr>();
     println!("Trace size {:?}", instruction_trace.len().next_power_of_two());
 
