@@ -19,8 +19,7 @@ pub fn main() {
     sig_2.copy_from_slice(&signature[32..]);
 
     let (program, _) = guest::preprocess_verify_eddsa();
-    let (_, _, instruction_trace, _, _) =
-    program.clone().trace::<Fr>();
+    let (_, _, instruction_trace, _, _) = program.clone().trace::<Fr>();
     println!("Trace size {:?}", instruction_trace.len().next_power_of_two());
 
 
