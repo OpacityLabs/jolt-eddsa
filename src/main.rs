@@ -1,6 +1,6 @@
 use ed25519_compact::KeyPair;
 
-
+use ark_bn254::Fr;
 
 pub fn main() {
     let key_pair = KeyPair::from_seed([42u8; 32].into());
@@ -18,22 +18,10 @@ pub fn main() {
     sig_1.copy_from_slice(&signature[..32]);
     sig_2.copy_from_slice(&signature[32..]);
 
-
-    let (prove_eddsa, verify_eddsa) = guest::build_verify_eddsa();
-
-    println!("public_key: {:?}", public_key.len());
-    println!("signature: {:?}", signature.len());
-    println!("message: {:?}", message);
-
-    let (output, proof) = prove_eddsa(public_key, padded_message, (sig_1, sig_2));
-
-
-
-
-    let is_valid = verify_eddsa(proof);
-
-    println!("output: {}", output);
-    println!("valid: {}", is_valid);
+    let (program, _) = guest::preprocess_verify_eddsa();
+    let (_, _, instruction_trace, _, _) =
+    program.clone().trace::<Fr>();
+    println!("Trace size {:?}", instruction_trace.len().next_power_of_two());
 
 
 

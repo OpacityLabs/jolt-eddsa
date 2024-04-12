@@ -3,7 +3,7 @@
 
 use ed25519_compact::PublicKey;
 
-#[jolt::provable]
+#[jolt::provable(stack_size = 100000, memory_size = 10000000)]
 fn verify_eddsa(public_key:[u8;32], message:[u8;32], split_signature:([u8;32],[u8;32])) -> bool {
 
     let mut signature = [0u8;64];

@@ -570,6 +570,7 @@ dependencies = [
 name = "eddsa"
 version = "0.1.0"
 dependencies = [
+ "ark-bn254",
  "ed25519-compact",
  "guest",
  "jolt-sdk",
